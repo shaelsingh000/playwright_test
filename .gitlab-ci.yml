@@ -6,10 +6,6 @@ stages:
 variables:
   PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
 
-cache:
-  paths:
-    - .cache/pip
-
 test:
   stage: test
   image: mcr.microsoft.com/playwright/python:v1.58.0-jammy
@@ -23,7 +19,6 @@ test:
     when: always
     paths:
       - allure-results
-    expire_in: 7 days
 
 report:
   stage: report
@@ -46,14 +41,18 @@ report:
     paths:
       - allure-report
 
-deploy:
+# 👇 THIS IS THE FIX
+pages:
   stage: deploy
   dependencies:
     - report
+
   script:
     - mv allure-report public
+
   artifacts:
     paths:
       - public
+
   only:
     - main

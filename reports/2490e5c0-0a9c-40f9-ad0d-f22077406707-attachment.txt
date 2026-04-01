@@ -1,0 +1,5 @@
+[32mINFO    [0m test_cart:test_cart.py:17 Navigating to Login page
+[32mINFO    [0m test_cart:test_cart.py:19 Logging into the site
+[32mINFO    [0m test_cart:test_cart.py:21 Add product to the cart
+[32mINFO    [0m test_cart:test_cart.py:23 Going to the cart page
+[32mINFO    [0m test_cart:test_cart.py:25 Asserting that out poduct is present in the cart

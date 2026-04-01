@@ -26,7 +26,7 @@ test:
 
 report:
   stage: report
-  image: openjdk:17-jdk-slim   # ✅ FIXED
+  image: eclipse-temurin:17-jdk-jammy   # ✅ FIXED
 
   dependencies:
     - test

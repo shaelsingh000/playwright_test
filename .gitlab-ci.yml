@@ -26,13 +26,13 @@ test:
 
 report:
   stage: report
-  image: python:3.10
+  image: openjdk:17-jdk-slim   # ✅ FIXED
 
   dependencies:
     - test
 
   before_script:
-    - apt-get update && apt-get install -y openjdk-11-jdk wget unzip
+    - apt-get update && apt-get install -y wget unzip
     - wget https://github.com/allure-framework/allure2/releases/download/2.27.0/allure-2.27.0.zip
     - unzip allure-2.27.0.zip
     - mv allure-2.27.0 /opt/allure

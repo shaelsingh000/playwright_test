@@ -83,7 +83,7 @@ def test_logout(page):
     page.click("#logout_sidebar_link")
 
     page.wait_for_url("**/")
-    assert "login" in page.url.lower()
+    assert page.url == URL
 
 @pytest.mark.regression
 @pytest.mark.auth

@@ -37,36 +37,37 @@ report:
     - ln -s /opt/allure/bin/allure /usr/bin/allure
 
   script:
-    # ✅ STEP 1: Download previous history from GitLab Pages
-    - mkdir -p allure-report
+    # ✅ Step 1: Download previous history
     - wget https://playwright-tests-91d4df.gitlab.io/history.tar.gz || true
-    - tar -xzf history.tar.gz -C allure-report || true
+    - mkdir -p old-history
+    - tar -xzf history.tar.gz -C old-history || true
 
-    # ✅ STEP 2: Inject history into results
-    - if [ -d allure-report/history ]; then cp -r allure-report/history allure-results/; fi
+    # ✅ Step 2: Inject into results
+    - if [ -d old-history/history ]; then cp -r old-history/history allure-results/; fi
 
-    # ✅ STEP 3: Generate new report with trends
+    # ✅ Step 3: Generate report
     - allure generate allure-results -o allure-report --clean
 
-    # ✅ STEP 4: Save history for next run
-    - mkdir -p public
-    - cp -r allure-report/history public/
-    - tar -czf public/history.tar.gz allure-report/history
+    # ✅ Step 4: Prepare FINAL public folder
+    - mkdir public
+    - cp -r allure-report/* public/
+
+    # ✅ Step 5: Save history for next run
+    - tar -czf public/history.tar.gz -C allure-report history
 
   artifacts:
     when: always
     paths:
-      - allure-report
       - public
-
+  
 pages:
   stage: deploy
+
   dependencies:
     - report
 
   script:
-    # ✅ Move final report to GitLab Pages
-    - mv allure-report public
+    - echo "Deploying Pages..."
 
   artifacts:
     paths:
@@ -74,5 +75,5 @@ pages:
 
   only:
     - main
-  
+
   when: always

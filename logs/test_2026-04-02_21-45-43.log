@@ -1,0 +1,6 @@
+2026-04-02 21:45:43,467 - INFO - Starting Add to Cart test
+2026-04-02 21:45:49,794 - INFO - Navigating to Login page
+2026-04-02 21:45:50,637 - INFO - Logging into the site
+2026-04-02 21:45:50,861 - INFO - Add product to the cart
+2026-04-02 21:45:50,914 - INFO - Going to the cart page
+2026-04-02 21:45:50,968 - INFO - Asserting that out poduct is present in the cart

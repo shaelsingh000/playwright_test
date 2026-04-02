@@ -1,15 +1,19 @@
+import pytest
+
 from pages.login_page import LoginPage
 from pages.inventory_page import InventoryPage
 from pages.cart_page import CartPage
 from data.login_data import valid_user
 from utils.logger import get_logger
+from utils.config import CONFIG,ENV
 
+URL = CONFIG[ENV]["base_url"]
 logger = get_logger(__name__)
 
 logger.info("Starting Add to Cart test")
 
-URL = "https://www.saucedemo.com/"
-
+@pytest.mark.smoke
+@pytest.mark.cart
 def test_add_to_cart(page):
     login = LoginPage(page)
     inventory = InventoryPage(page)

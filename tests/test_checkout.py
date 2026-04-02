@@ -1,11 +1,16 @@
+import pytest
+
 from pages.login_page import LoginPage
 from pages.inventory_page import InventoryPage
 from pages.cart_page import CartPage
 from pages.checkout_page import CheckoutPage
 from data.login_data import valid_user
+from utils.config import CONFIG,ENV
 
-URL = "https://www.saucedemo.com/"
+URL = CONFIG[ENV]["base_url"]
 
+@pytest.mark.smoke
+@pytest.mark.checkout
 def test_checkout_flow(page):
     login = LoginPage(page)
     inventory = InventoryPage(page)

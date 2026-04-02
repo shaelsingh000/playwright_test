@@ -35,19 +35,29 @@ report:
     - ln -s /opt/allure/bin/allure /usr/bin/allure
 
   script:
+    # ✅ Pull previous history (from Pages)
+    - mkdir -p allure-results/history
+    - if [ -d public/history ]; then cp -r public/history allure-results/; fi
+
+    # ✅ Generate report with history
     - allure generate allure-results -o allure-report --clean
 
+    # ✅ Save history for next pipeline
+    - cp -r allure-report/history allure-results/ || true
+
   artifacts:
+    when: always
     paths:
       - allure-report
+      - allure-results
 
-# 👇 THIS IS THE FIX
 pages:
   stage: deploy
   dependencies:
     - report
 
   script:
+    # ✅ Move final report to GitLab Pages
     - mv allure-report public
 
   artifacts:

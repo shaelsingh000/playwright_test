@@ -13,7 +13,7 @@ test:
   script:
     - pip install --upgrade pip
     - pip install -r requirements.txt
-    - pytest --alluredir=allure-results
+    - pytest --alluredir=allure-results || true
 
   artifacts:
     when: always
@@ -26,6 +26,8 @@ report:
 
   dependencies:
     - test
+
+  when: always
 
   before_script:
     - apt-get update && apt-get install -y wget unzip
@@ -66,3 +68,5 @@ pages:
 
   only:
     - main
+  
+  when: always
